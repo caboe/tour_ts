@@ -8,7 +8,7 @@ export function configure(aurelia: Aurelia) {
     .standardConfiguration()
     .feature('resources')
       .plugin('aurelia-i18n', (instance) => {
-        let aliases = ['t', 'i18n'];
+        let aliases:Array<string> = ['t', 'i18n'];
         instance.i18next.use(Backend);
         return instance.setup({
           backend: {
