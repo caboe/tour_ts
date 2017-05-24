@@ -1,0 +1,6 @@
+<template>
+    <require from="./stage/stage"></require>
+    <require from="./prolog/prolog"></require>
+    <stage if.bind="['etap'].includes(navigationService.section)"></stage>
+    <prolog if.bind="['article', 'prolog'].includes(navigationService.section)"></prolog>
+</template>

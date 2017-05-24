@@ -1,0 +1,52 @@
+@import "../../scssCommon/boxes";
+
+.pageStage {
+  //background-image: linear-gradient(rgba(252, 252, 252, 0.9), rgba(255, 255, 255, 0.9)); //border-radius: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  //padding: 1.5rem 2rem;
+  margin: 3rem 4rem;
+  position: relative;
+  //box-shadow: 1px 1px 6px #999;
+
+  &:after, &:before {
+    //content: "";
+    position: absolute;
+    right: 0;
+    left: auto;
+    /* bottom: 0; */
+    /* width: 120%; */
+    width: 10px;
+    top: -50%;
+    bottom: -50%;
+    background: radial-gradient(ellipse at 140% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+  }
+
+  &:before {
+    left: 0;
+    right: auto;
+    background: radial-gradient(ellipse at -40% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+  }
+  > .flexChild {
+    flex: 1 0 30rem;
+    align-self: flex-start;
+    margin: 0 2rem 2rem;
+  }
+
+  .report {
+    @include textBox;
+  }
+  .slideshowContainer {
+    flex-grow: 4;
+    flex-basis: 50vw;
+  }
+  h1 {
+    font-size: 1.6rem;
+    text-align: right;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+}

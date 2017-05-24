@@ -1,0 +1,35 @@
+@mixin textBox {
+  position: relative;
+  font-size: 12px;
+  text-align: justify;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
+  background-image: linear-gradient(rgba(252, 255, 255, 0.9), white);
+  padding: 2rem;
+
+  &:after, &:before {
+    content: "";
+    position: absolute;
+    right: auto;
+    left: 100%;
+    width: 10px;
+    top: -50%;
+    bottom: -50%;
+    background: radial-gradient(ellipse at -30% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+  }
+
+  &:before {
+    left: auto;
+    right: 100%;
+    background: radial-gradient(ellipse at 140% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+  }
+
+  @media only screen and (min-width: 768px) {
+    font-size: 13px;
+  }
+  @media only screen and (min-width: 1280px) {
+    font-size: 14px;
+  }
+}

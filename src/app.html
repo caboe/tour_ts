@@ -1,0 +1,10 @@
+<template>
+  <require from="./app.css"></require>
+  <require from="./page/page"></require>
+  <require from="header/header"></require>
+  <div class="all">
+    <header></header>
+    <page></page>
+  </div>
+  <div click.trigger="hideFade()" class.bind="showFade ? 'fade' : ''"></div>
+</template>

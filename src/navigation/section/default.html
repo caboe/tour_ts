@@ -1,0 +1,8 @@
+<template>
+    <div class="items">
+        <div repeat.for="item of section" click.trigger="navigateTo([sectionId, $index])"
+             class="item ${currentItem == item?'active':''}">
+            ${item.title}
+        </div>
+    </div>
+</template>

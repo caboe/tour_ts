@@ -1,0 +1,9 @@
+<template>
+    <require from="./stageRenderer.css"></require>
+    <div class="items">
+        <div class="item item_stage" repeat.for="item of section" click.trigger="navigateTo([sectionId, $index])"
+             class="item ${currentItem == item?'active':''}">
+            ${$index}
+        </div>
+    </div>
+</template>
