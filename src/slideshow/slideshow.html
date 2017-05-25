@@ -7,7 +7,7 @@
     <div class="slideshow_content ${!transition?'jump':''}"
          css="left: -${current * 100}%">
       <div if.bind="loading">Loading</div>
-      <div repeat.for="image of imageService.currentStage" class="slide"
+      <div if.bind="!loading" repeat.for="image of imageService.currentStage" class="slide"
            css="left: ${$index * 100}%;background-image: url(http://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_b.jpg);">
         <div class="description">${image.description} ${(!$parent.transition)?'jump':'foo'}</div>
       </div>
