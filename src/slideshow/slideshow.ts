@@ -1,4 +1,4 @@
-import {inject, bindable} from 'aurelia-framework';
+import {inject, bindable, computedFrom} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {ImageService} from '../image-service';
 
@@ -14,6 +14,7 @@ export class Slideshow {
   slidePosition: number;
   tick: number;
   transition: boolean;
+  lastStageId: any;
 
   constructor(imageService, eventAggregator) {
     this.eventAggregator = eventAggregator;
@@ -22,13 +23,29 @@ export class Slideshow {
     this.current = 0;
     this.slidePosition = 0;
     this.transition = true;
-    this.eventAggregator.subscribe('imageCollection', ({state}) => {if (state === 'finished') this.imageService.loadImagesForStageId(this.stageId)});
-    this.eventAggregator.subscribe('imageStage', ({state}) => {if (state === 'finished') this.initSlideshow()});
+    this.eventAggregator.subscribe('imageCollection', ({state}) => {
+      if (state === 'finished') this.loadForCurrentStageId()
+    });
+    this.eventAggregator.subscribe('imageStage', ({state}) => {
+      if (state === 'finished') this.init()
+    });
   }
 
-  initSlideshow() {
+  @computedFrom('stageId')
+  get refreshHack() {
+    if (this.stageId != this.lastStageId)
+      this.loadForCurrentStageId();
+    return;
+  }
+
+  loadForCurrentStageId() {
+    this.imageService.loadImagesForStageId(this.stageId);
+    this.lastStageId = this.stageId;
+  }
+
+  init() {
     this.collection = this.imageService.currentStage;
-    this.collection.push(this.imageService.currentStage[0])
+    this.collection.push(this.imageService.currentStage[0]);
     this.start();
     this.loading = false;
   }
@@ -50,10 +67,8 @@ export class Slideshow {
   }
 
   next() {
-    if (this.current == this.collection.length - 1) {
+    if (this.current == this.collection.length - 1)
       this.jumpToStart();
-      debugger
-    }
     this.current++;
   }
 
@@ -76,7 +91,6 @@ export class Slideshow {
     }
     else {
       this.current--;
-
     }
   }
 }
