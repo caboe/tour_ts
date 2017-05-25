@@ -34,8 +34,15 @@ export class Slideshow {
   @computedFrom('stageId')
   get refreshHack() {
     if (this.stageId != this.lastStageId)
-      this.loadForCurrentStageId();
+      this.restart();
     return;
+  }
+
+  restart() {
+    this.stop();
+    this.loading = true;
+    this.loadForCurrentStageId();
+    this.current = 0;
   }
 
   loadForCurrentStageId() {
@@ -47,10 +54,10 @@ export class Slideshow {
     this.collection = this.imageService.currentStage;
     this.collection.push(this.imageService.currentStage[0]);
     this.start();
-    this.loading = false;
   }
 
   start() {
+    this.loading = false;
     window.clearInterval(this.tick);
     this.tick = window.setInterval(() => {
       this.next()
