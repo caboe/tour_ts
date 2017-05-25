@@ -1,13 +1,12 @@
 import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
-import {I18N} from 'aurelia-i18n';
-import Backend from 'i18next-xhr-backend';
+// import {I18N, Backend} from 'aurelia-i18n';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature('resources')
-      .plugin('aurelia-i18n', (instance) => {
+ /*     .plugin('aurelia-i18n', (instance) => {
         let aliases:Array<string> = ['t', 'i18n'];
         instance.i18next.use(Backend);
         return instance.setup({
@@ -21,8 +20,7 @@ export function configure(aurelia: Aurelia) {
           debug: false
         });
       });
-
-  if (environment.debug) {
+*/  if (environment.debug) {
     aurelia.use.developmentLogging();
   }
 

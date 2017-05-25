@@ -8,8 +8,12 @@
             <p innerhtml="${navigationService.currentPage.text | sanitizeHTML}"></p>
             <div>${navigationService.currentPage.date}</div>
             <div>
+                <span>Distanz: ${navigationService.currentPage.distance}</span>
+                <span>Höhenmeter: ${navigationService.currentPage.hm}</span>
+<!--
                 <span>${'common:distance' | t:{distance: navigationService.currentPage.distance}}</span>
                 <span>${'common:height_meter' | t:{hm: navigationService.currentPage.hm}}</span>
+-->
             </div>
         </div>
       ${navigationService.currentPage.imageId}
