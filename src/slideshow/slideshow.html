@@ -1,24 +1,24 @@
 <template>
-    <require from="./slideshow.css"></require>
-    <div class="slideshow">
-        <img class="squareImage"
-             src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-             alt="">
-        <div class="slideshow_content ${!transition?'jump':''}"
-             css="left: -${current * 100}%">
-            <div if.bind="loading">Loading</div>
-            <div repeat.for="params of imageService.currentStage" class="slide"
-                 css="left: ${$index * 100}%;background-image: url(http://farm${params.farm}.static.flickr.com/${params.server}/${params.id}_${params.secret}_b.jpg);">
-                <div class="description">${params.title} ${(!$parent.transition)?'jump':'foo'}</div>
-            </div>
-        </div>
-        <div class="slideShadow"></div>
+  <require from="./slideshow.css"></require>
+  <div class="slideshow">
+    <img class="squareImage"
+         src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+         alt="">
+    <div class="slideshow_content ${!transition?'jump':''}"
+         css="left: -${current * 100}%">
+      <div if.bind="loading">Loading</div>
+      <div repeat.for="image of imageService.currentStage" class="slide"
+           css="left: ${$index * 100}%;background-image: url(http://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_b.jpg);">
+        <div class="description">${image.description} ${(!$parent.transition)?'jump':'foo'}</div>
+      </div>
     </div>
-    <div class="controls">
-        <div class="start button" click.trigger="directStart()"></div>
-        <div class="stop  button" click.trigger="stop()"></div>
-        <div class="counter">${current + 1} / ${collection.length}</div>
-        <div class="previous button" click.trigger="previous()"></div>
-        <div class="next  button"  click.trigger="next()"></div>
-    </div>
+    <div class="slideShadow"></div>
+  </div>
+  <div class="controls">
+    <div class="start button" click.trigger="directStart()"></div>
+    <div class="stop  button" click.trigger="stop()"></div>
+    <div class="counter">${current + 1} / ${collection.length}</div>
+    <div class="previous button" click.trigger="previous()"></div>
+    <div class="next  button" click.trigger="next()"></div>
+  </div>
 </template>

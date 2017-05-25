@@ -1,4 +1,4 @@
-import {bindable, inject, computedFrom} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
 import {NavigationService} from '../navigation-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {NavigationBase} from "./navigationBase";
