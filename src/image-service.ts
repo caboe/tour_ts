@@ -46,7 +46,8 @@ export class ImageService {
     client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=${escapeId}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&json`)
       .then(data => {
         this.currentStage = data.response.photoset.photo;
-        this.loadPageImagesDescription();
+        this.addImageDescriptions();
+        this.addImagePaths();
         this.preloadPageImages(this.getImagePathList()).then(() => this.eventAggregator.publish('imageStage', {state: 'finished'}));
       });
   }
@@ -54,47 +55,42 @@ export class ImageService {
   getImagePathList() {
     let result = [];
     for (let image of this.currentStage) {
-      result.push(`https://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_s.jpg`);
-      // result.push(`http://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_b.jpg`);
-
-      this.addImageDescription(image)
+      result.push(image.urls.b);
     }
     return result;
   }
 
-
-  loadPageImagesDescription() {
+  addImagePaths() {
     for (let image of this.currentStage) {
-      this.addImageDescription(image);
-      this.addImagePaths(image);
-      console.log(image)
+      image.urls = {};
+      for (let format of ['s', 'm', 'b']) {
+        image.urls[format] = `https://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_${format}.jpg`
+      }
     }
   }
 
-  addImagePaths(image) {
-    image.urls = {};
-    for (let format of ['s', 'm', 'b']) {
-      image.urls[format] = `https://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_${format}.jpg`
-    }
-  }
-
-  addImageDescription(image) {
+  addImageDescriptions() {
     let client = new HttpClient();
-    client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${image.id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
-      .then(data => {
-        image.description = data.response.photo.description._content;
-      });
+    for (let image of this.currentStage) {
+      client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${image.id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
+        .then(data => {
+          image.description = data.response.photo.description._content;
+        });
+    }
   }
 
-  preloadImage = path =>
+  preloadImage(path) {
     new Promise(resolve => {
       const img = new Image();
       img.onload = () => resolve({path, status: 'ok'});
       img.onerror = () => resolve({path, status: 'error'});
       img.src = path;
     });
+  }
 
-  preloadPageImages = paths => Promise.all(paths.map(this.preloadImage))
+  preloadPageImages(paths) {
+    return Promise.all(paths.map(this.preloadImage));
+  }
 
   getIdForStage(nr) {
     return this.collection[nr].id;

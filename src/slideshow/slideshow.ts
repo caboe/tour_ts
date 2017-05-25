@@ -61,7 +61,7 @@ export class Slideshow {
     window.clearInterval(this.tick);
     this.tick = window.setInterval(() => {
       this.next()
-    }, 3000);
+    }, 7000);
   }
 
   directStart() {
@@ -79,6 +79,15 @@ export class Slideshow {
     this.current++;
   }
 
+  previous() {
+    if (this.current == 0) {
+      this.jumpToEnd();
+    }
+    else {
+      this.current--;
+    }
+  }
+
   jumpToStart() {
     this.transition = false;
     this.current = -1;
@@ -89,15 +98,5 @@ export class Slideshow {
     this.transition = false;
     this.current = this.collection.length - 1;
     this.transition = true;
-  }
-
-  previous() {
-    if (this.current == 0) {
-      this.jumpToEnd();
-
-    }
-    else {
-      this.current--;
-    }
   }
 }
