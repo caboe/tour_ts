@@ -18,7 +18,6 @@ export class Slideshow {
   constructor(imageService, eventAggregator) {
     this.eventAggregator = eventAggregator;
     this.imageService = imageService;
-    this.imageService.setCurrentCollection(0);
     this.loading = true;
     this.current = 0;
     this.slidePosition = 0;
@@ -53,27 +52,26 @@ export class Slideshow {
   next() {
     if (this.current == this.collection.length - 1) {
       this.jumpToStart();
-      // debugger
+      debugger
     }
     this.current++;
-    // this.transition = true
   }
 
   jumpToStart() {
-    // debugger
-    // this.transition = false
-    this.current = 0;
+    this.transition = false;
+    this.current = -1;
+    this.transition = true;
   }
 
   jumpToEnd() {
-    this.transition = false
-    this.current = this.collection.length - 1
+    this.transition = false;
+    this.current = this.collection.length - 1;
+    this.transition = true;
   }
 
   previous() {
     if (this.current == 0) {
       this.jumpToEnd();
-      this.transition = true
 
     }
     else {

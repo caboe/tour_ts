@@ -23,61 +23,70 @@ export class ImageService {
     client.jsonp('https://api.flickr.com/services/rest/?method=flickr.collections.getTree&user_id=24537538@N04&api_key=531e7a0d62fe823d91b9ebcfca750195&collection_id=72157624746422138&format=json')
       .then(data => {
         this.collection = data.response.collections.collection[0].set;
-        this.refreshCurrentCollection();
         this.eventAggregator.publish('imageCollection', {state: 'finished'});
       });
   }
 
-  loadCurrentStage() {
-    this.loadStage(this.currentNr);
+  loadCurrentPageImages() {
+    this.loadPageImages(this.currentNr);
   }
 
-  loadStage(nr) {
-    if (!this.collection.length) {
-      return
-    }
+  loadPageImages(nr) {
+    if (!this.collection.length)
+      return;
 
     const setId: string = this.getIdForStage(nr);
-    this.loadStageForId(setId);
+    this.loadPageImagesForId(setId);
   }
 
-  loadStageForId(id) {
+  loadPageImagesForId(id) {
     this.eventAggregator.publish('imageStage', {state: 'load'});
     let client = new HttpClient();
-    const escapeId = encodeURIComponent(id);
+    const escapeId: string = encodeURIComponent(id);
     client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=${escapeId}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&json`)
       .then(data => {
         this.currentStage = data.response.photoset.photo;
-        this.loadImagesDescriptions();
-        this.loadImg(this.imagePathList()).then(()=>this.eventAggregator.publish('imageStage', {state: 'finished'}));
+        this.loadPageImagesDescription();
+        this.preloadPageImages(this.getImagePathList()).then(() => this.eventAggregator.publish('imageStage', {state: 'finished'}));
       });
   }
 
-  imagePathList(){
+  getImagePathList() {
     let result = [];
     for (let image of this.currentStage) {
-      result.push(`http://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_b.jpg`);
-      this.loadImageForId(image.id, image)
+      result.push(`https://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_s.jpg`);
+      // result.push(`http://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_b.jpg`);
+
+      this.addImageDescription(image)
     }
     return result;
   }
 
-  loadImagesDescriptions() {
-    for (let image of this.currentStage) {
-      this.loadImageForId(image.id, image)
-    }
 
+  loadPageImagesDescription() {
+    for (let image of this.currentStage) {
+      this.addImageDescription(image);
+      this.addImagePaths(image);
+      console.log(image)
+    }
   }
 
-  loadImageForId(id, image) {
+  addImagePaths(image) {
+    image.urls = {};
+    for (let format of ['s', 'm', 'b']) {
+      image.urls[format] = `https://farm${image.farm}.static.flickr.com/${image.server}/${image.id}_${image.secret}_${format}.jpg`
+    }
+  }
+
+  addImageDescription(image) {
     let client = new HttpClient();
-    client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
+    client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${image.id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
       .then(data => {
         image.description = data.response.photo.description._content;
       });
   }
 
-  checkImage = path =>
+  preloadImage = path =>
     new Promise(resolve => {
       const img = new Image();
       img.onload = () => resolve({path, status: 'ok'});
@@ -85,20 +94,11 @@ export class ImageService {
       img.src = path;
     });
 
-  loadImg = paths => Promise.all(paths.map(this.checkImage))
+  preloadPageImages = paths => Promise.all(paths.map(this.preloadImage))
 
   getIdForStage(nr) {
     return this.collection[nr].id;
   }
-
-  refreshCurrentCollection() {
-    this.setCurrentCollection(this.currentNr);
-  }
-
-  setCurrentCollection(nr) {
-    this.currentNr = nr;
-    this.loadCurrentStage();
-  };
 
   getImageForId(id) {
     for (let image of this.currentStage) {
@@ -111,7 +111,7 @@ export class ImageService {
   loadImagesForStageId(id) {
     for (let stage of this.collection) {
       if (stage.title === id) {
-        this.loadStageForId(stage.id);
+        this.loadPageImagesForId(stage.id);
       }
     }
   }
