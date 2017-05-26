@@ -20,7 +20,7 @@
     <div class="start button" click.trigger="directStart()"></div>
     <div class="stop  button" click.trigger="stop()"></div>
     <div class="counter">${current + 1} / ${collection.length}</div>
-    <div class="previous button" click.trigger="previous()"></div>
-    <div class="next  button" click.trigger="next()"></div>
+    <div class="previous button" click.trigger="stopAndPrevious()"></div>
+    <div class="next  button" click.trigger="stopAndNext()"></div>
   </div>
 </template>

@@ -88,6 +88,16 @@ export class Slideshow {
     }
   }
 
+  stopAndNext(){
+    this.stop();
+    this.next();
+  }
+
+  stopAndPrevious(){
+    this.stop();
+    this.previous();
+  }
+
   jumpToStart() {
     this.transition = false;
     this.current = -1;
