@@ -52,7 +52,7 @@ export class ImageService {
       });
   }
 
-  getImagePathList() {
+  getImagePathList(): Array<string> {
     let result = [];
     for (let image of this.currentStage) {
       result.push(image.urls.b);
@@ -92,7 +92,7 @@ export class ImageService {
     return Promise.all(paths.map(this.preloadImage));
   }
 
-  getIdForStage(nr) {
+  getIdForStage(nr): string {
     return this.collection[nr].id;
   }
 
