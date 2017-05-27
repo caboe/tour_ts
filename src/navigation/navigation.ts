@@ -15,3 +15,17 @@ export class KeysValueConverter {
     return Reflect.ownKeys(obj);
   }
 }
+
+/*
+ import { Router } from 'aurelia-router';
+
+ @inject(Router)
+ export class UsersViewModel {
+ constructor(router) {
+ this.router = router;
+ }
+ doStuff() {
+ this.router.navigateToRoute('plan');
+ }
+ }
+ */
