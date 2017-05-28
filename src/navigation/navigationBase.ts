@@ -1,4 +1,4 @@
-import {bindable, inject, computedFrom} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
 import {NavigationService} from '../navigation-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
@@ -9,9 +9,9 @@ export class NavigationBase {
   sections: any;
   navigationActive: boolean;
 
-  constructor(navigationService: NavigationService, EventAggregator: EventAggregator) {
+  constructor(navigationService: NavigationService, eventAggregator: EventAggregator) {
     this.navigationService = navigationService;
-    this.eventAggregator = EventAggregator;
+    this.eventAggregator = eventAggregator;
     this.sections = this.navigationService.sections;
     this.navigationActive = false;
     this.eventAggregator.subscribe('showFade', function (response) {
@@ -44,7 +44,7 @@ export class NavigationBase {
     this.navigationActive ? this.hide() : this.show()
   }
 
-  navigateTo(navigatePath) {
+  navigateTo(navigatePath: Array<string>) {
     this.navigationService.navigateToPage(navigatePath);
     this.eventAggregator.publish('showFade', {active: false});
   }

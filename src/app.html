@@ -4,14 +4,6 @@
   <require from="header/header"></require>
   <div class="all">
     <header></header>
-    <nav>
-      <ul>
-        <li repeat.for = "row of router.navigation">
-          <!--<a href.bind = "row.href">${row.title} x${row.href}y</a>-->
-          <div click.trigger="navigateTo(row.href)">${row.title}${row.path}</div>
-        </li>
-      </ul>
-    </nav>
     <router-view></router-view>
   </div>
   <div click.trigger="hideFade()" class.bind="showFade ? 'fade' : ''"></div>
