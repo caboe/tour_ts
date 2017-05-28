@@ -7,14 +7,11 @@
 - use icon set
 
 **Rest**
-- Flickr 
 - Translate
 
 **Basics**
-- transform to ts
 - navigateToNext
 - esLint
-- routing
 - postCSS
   - autoprefixing
   - cssNext
@@ -26,10 +23,6 @@
 
 **Data**
 - copyJSON
-
-**Image Service**
-- loadStage
-- getImageData
 
 **Slideshow**
 - fullScreen

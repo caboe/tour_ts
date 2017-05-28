@@ -11,7 +11,7 @@
       </div>
       <div if.bind="!loading" repeat.for="image of imageService.currentStage" class="slide"
            css="left: ${$index * 100}%;background-image: url(${image.urls.b});">
-        <div class="description">${image.description}${refreshHack}</div>
+        <div class="description" innerhtml="${image.description}"></div>
       </div>
     </div>
     <div class="slideShadow"></div>
@@ -23,4 +23,5 @@
     <div class="previous button" click.trigger="stopAndPrevious()"></div>
     <div class="next  button" click.trigger="stopAndNext()"></div>
   </div>
+  ${refreshHack}
 </template>
