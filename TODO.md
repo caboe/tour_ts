@@ -10,13 +10,13 @@
 - Translate
 
 **Basics**
-- navigateToNext
 - esLint
 - postCSS
   - autoprefixing
   - cssNext
 - tests
 - flickr-service as node module
+- animation module
   
 **Templates**
 - Links

@@ -6,8 +6,8 @@
         <navigation class="hamburger"></navigation>
         <h1 class="title">Eurotour 2010</h1>
         <div class="step">
-            <div class="back">-</div>
-            <div class="forward">+</div>
+            <div class="back" click.trigger="navigationService.navigateToPreviousPage()">-</div>
+            <div class="forward" click.trigger="navigationService.navigateToNextPage()">+</div>
         </div>
     </div>
 </template>

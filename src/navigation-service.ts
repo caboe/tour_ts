@@ -6,11 +6,12 @@ import {inject} from 'aurelia-framework';
 
 @inject(Router)
 export class NavigationService {
-  sections: any;//TODO type
-  navigatePath: Array<string>;
-  currentPage: JSON;
-  currentSection: string;
-  router: Router;
+  private sections: any;//TODO type
+  private navigatePath: Array<string>;
+  private currentPage: JSON;
+  private currentSection: string;
+  private router: Router;
+  private linearNavigationList: Array<string>;
 
   constructor(router) {
     this.router = router;
@@ -18,6 +19,7 @@ export class NavigationService {
     this.navigatePath = ['etap', '0'];
     this.currentPage = this.page;
     this.currentSection = this.section;
+    this.linearNavigationList = this.getLinearNavigationList();
     // this.navigateToPage(this.navigatePath);
   }
 
@@ -40,8 +42,30 @@ export class NavigationService {
     return this.navigatePath[0];
   }
 
-  getRouteName(path: Array<string>): string{
+  public navigateToNextPage(): void{
+    if (this.linearNavigationList.length === this.currentIndex + 1)
+      this.navigateToPage(this.getRouteArray(this.linearNavigationList[0]));
+    else
+      this.navigateToPage(this.getRouteArray(this.linearNavigationList[this.currentIndex + 1]));
+  }
+
+  public navigateToPreviousPage(): void{
+    if (this.currentIndex === 0)
+      this.navigateToPage(this.getRouteArray(this.linearNavigationList[this.linearNavigationList.length -1]));
+    else
+      this.navigateToPage(this.getRouteArray(this.linearNavigationList[this.currentIndex - 1]));
+  }
+
+  private get currentIndex(): number{
+    return this.linearNavigationList.indexOf(this.getRouteName(this.navigatePath));
+  }
+
+  private getRouteName(path: Array<string>): string{
     return path.join('_');
+  }
+
+  private getRouteArray(path: string): Array<string>{
+    return path.split('_');
   }
 
   get routeMap(): Array<any> {
@@ -82,6 +106,16 @@ export class NavigationService {
       }
     }
     return navigationMap;
+  }
+
+  private getLinearNavigationList(): Array<string>{
+    let result = [];
+    for (let section in this.sections) {
+      for (let page in this.sections[section]) {
+        result.push(section + '_' + page);
+      }
+    }
+    return result;
   }
 
   getSectionForPath(section: string) {
