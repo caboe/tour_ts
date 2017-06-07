@@ -21,6 +21,7 @@ export class App {
   configureRouter(config: RouterConfiguration, router: Router): void {
     this.router = router;
     config.title = 'Aurelia';
+    config.options.pushState = true;
     config.map(this.navigationService.routeMap);
     config.mapUnknownRoutes('not-found');//TODO
   }

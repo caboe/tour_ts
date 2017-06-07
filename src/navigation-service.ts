@@ -6,12 +6,13 @@ import {inject} from 'aurelia-framework';
 
 @inject(Router)
 export class NavigationService {
-  private sections: any;//TODO type
+  public sections: any;//TODO type
   private navigatePath: Array<string>;
   private currentPage: JSON;
   private currentSection: string;
   private router: Router;
   private linearNavigationList: Array<string>;
+  private delimiter: string = '/';
 
   constructor(router) {
     this.router = router;
@@ -61,11 +62,11 @@ export class NavigationService {
   }
 
   private getRouteName(path: Array<string>): string{
-    return path.join('_');
+    return path.join(this.delimiter);
   }
 
   private getRouteArray(path: string): Array<string>{
-    return path.split('_');
+    return path.split(this.delimiter);
   }
 
   get routeMap(): Array<any> {
@@ -93,7 +94,7 @@ export class NavigationService {
           title: '',
           nav: true
         };
-        rowObject['route'] = section + '_' + page;
+        rowObject['route'] = section + this.delimiter + page;
         rowObject['name'] = this.getRouteName([section, page]);
         rowObject['title'] = this.sections[section][page].title;
         if (section === 'prolog')
@@ -112,7 +113,7 @@ export class NavigationService {
     let result = [];
     for (let section in this.sections) {
       for (let page in this.sections[section]) {
-        result.push(section + '_' + page);
+        result.push(this.getRouteName([section, page]));
       }
     }
     return result;
