@@ -9,9 +9,9 @@
       <div if.bind="loading" class="slide">
         <h1>Loading</h1>
       </div>
-      <div if.bind="!loading" repeat.for="image of imageService.currentStage" class="slide"
+      <div if.bind="!loading" repeat.for="image of collection" class="slide"
            css="left: ${$index * 100}%;background-image: url(${image.urls.b});">
-        <div class="description" innerhtml="${image.description}"></div>
+        <div class="description" innerhtml="${image.description}">${image.urls.b}</div>
       </div>
     </div>
     <div class="slideShadow"></div>
@@ -19,7 +19,7 @@
   <div if.bind="!loading" class="controls">
     <div class="start button" click.trigger="directStart()"></div>
     <div class="stop  button" click.trigger="stop()"></div>
-    <div class="counter">${current + 1} / ${collection.length}</div>
+    <div class="counter">${current < collection.length -1 ? current + 1: 1} / ${collection.length -1}</div>
     <div class="previous button" click.trigger="stopAndPrevious()"></div>
     <div class="next  button" click.trigger="stopAndNext()"></div>
   </div>

@@ -25,10 +25,6 @@ export class App {
     config.mapUnknownRoutes('not-found');//TODO
   }
 
-  navigateTo(route:string){
-    this.navigationService.navigateToPage(route.replace(/#\//,'').split('_'));
-  }
-
   hideFade() {
     this.eventAggregator.publish('showFade', {active: false});
   }

@@ -3,8 +3,8 @@
 - Header
 - Navigation
 - Sponsor
-- extract common SCSS
 - use icon set
+- full screen
 
 **Rest**
 - Translate
@@ -16,6 +16,7 @@
   - autoprefixing
   - cssNext
 - tests
+- flickr-service as node module
   
 **Templates**
 - Links
@@ -26,6 +27,5 @@
 
 **Slideshow**
 - fullScreen
-- continous slide
 - see on flickr link
 
