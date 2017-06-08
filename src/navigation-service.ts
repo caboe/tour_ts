@@ -8,7 +8,7 @@ import {inject} from 'aurelia-framework';
 export class NavigationService {
   public sections: any;//TODO type
   private navigatePath: Array<string>;
-  private currentPage: JSON;
+  public currentPage: JSON;
   private currentSection: string;
   private router: Router;
   private linearNavigationList: Array<string>;

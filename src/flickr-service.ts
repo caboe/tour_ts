@@ -70,10 +70,12 @@ export class FlickrService {
 
   private async addImageDescriptions(title: string): Promise<any> {
     let client = new HttpClient();
+    let deRegExp: RegExp = /(de \-\-\- )(.*?)(\-\-\- en)/;
     for (let image of this.imageStore[this.getIdForTitle(title)]) {
       client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${image.id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
         .then(data => {
-          image.description = data.response.photo.description._content;
+          let trimmedDescription: string = data.response.photo.description._content.replace(/\s+/g, ' ')
+          image.description = deRegExp.exec(trimmedDescription)[2];
         });
     }
   }

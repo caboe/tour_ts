@@ -3,9 +3,7 @@
     <require from="./section/default"></require>
     <require from="./section/stageRenderer"></require>
     <nav>
-        <div click.delegate="toggleNavigation()">
-            NAV
-        </div>
+        <div click.delegate="toggleNavigation()" class="menu control large"></div>
         <div class.bind="navigationVisible ? 'active navigation' : 'navigation'">
             <div repeat.for="section of sections  | keys" class="section ${section == currentSection?'active':''}">
                 <h1>${section}</h1>

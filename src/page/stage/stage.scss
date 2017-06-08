@@ -1,22 +1,16 @@
 @import "../../scssCommon/boxes";
 
 .pageStage {
-  //background-image: linear-gradient(rgba(252, 252, 252, 0.9), rgba(255, 255, 255, 0.9)); //border-radius: 3rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  //padding: 1.5rem 2rem;
   margin: 3rem 4rem;
   position: relative;
-  //box-shadow: 1px 1px 6px #999;
 
   &:after, &:before {
-    //content: "";
     position: absolute;
     right: 0;
     left: auto;
-    /* bottom: 0; */
-    /* width: 120%; */
     width: 10px;
     top: -50%;
     bottom: -50%;

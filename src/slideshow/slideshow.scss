@@ -2,7 +2,7 @@
   position: relative;
   overflow: hidden;
   border-radius: .5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   .squareImage {
     max-height: 85vh;
@@ -19,7 +19,6 @@
     bottom: 0;
     width: 100%;
     overflow: visible;
-    box-shadow: 0 1px 6px -3px rgba(40, 40, 40, .9) inset;
     border-radius: .5rem;
     background-position: center;
     background-size: contain;
@@ -51,7 +50,7 @@
   }
 
   .description {
-    background-color: rgba(0, 0, 0, .6);
+    background-color: rgba(0, 10, 30, 0.5);
     color: #fff;
     font-size: 1.4rem;
     padding: 1rem 2rem;
@@ -60,6 +59,8 @@
     right: -.3rem;
     bottom: -.3rem;
     border-radius: .4rem;
+    text-shadow: 0 0 2px rgba(0,0,0,.8);
+    text-align: center;
   }
   .slideShadow {
     position: absolute;
@@ -68,7 +69,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    box-shadow: 0 0 7px -2px #000 inset;
+    box-shadow: 0 0 5px -1px #000 inset;
     border-radius: 4px;
 
     &:after, &:before {
@@ -76,8 +77,6 @@
       position: absolute;
       right: 0;
       left: auto;
-      /* bottom: 0; */
-      /* width: 120%; */
       width: 10px;
       top: -50%;
       bottom: -50%;
@@ -89,79 +88,5 @@
       right: auto;
       background: radial-gradient(ellipse at -40% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
     }
-  }
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-
-  .button {
-    cursor: pointer;
-    background-image: radial-gradient(farthest-corner at 5px 5px, rgba(255, 255, 255, .8), rgba(100, 100, 100, .8));
-    text-align: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    margin: .5rem;
-
-    &:before {
-      font-family: "Genericons-Neue";
-      display: inline-block;
-      vertical-align: middle;
-      font-weight: normal;
-      font-style: normal;
-      speak: none;
-      text-decoration: inherit;
-      text-transform: none;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-size: 1.8rem;
-      line-height: 3rem;
-      color: transparent;
-      text-shadow: 0 0 0 rgba(255,255,255,.6), -1px -1px 0 rgba(0,0,0, .6);
-    }
-
-    &:hover {
-      background-image: radial-gradient(farthest-corner at 5px 5px, rgba(255, 255, 255, .6), rgba(120,120,120, .6));
-    }
-
-    &:active {
-      //background-image: radial-gradient(farthest-corner at 5px 5px, rgba(255, 255, 255, .9), rgba(200,200,200, .9));
-      background-image: radial-gradient(rgba(255, 255, 255, .6), rgba(100, 100, 100, .6));
-
-    }
-
-    &.start {
-      &:before {
-        content:"\f452";
-      }
-    }
-    &.stop {
-      &:before {
-        content:"\f449";
-      }
-    }
-    &.next {
-      &:before {
-        content:"\f451";
-      }
-    }
-    &.previous {
-      &:before {
-        content:"\f450";
-      }
-    }
-  }
-  .counter {
-    width: 10rem;
-    text-align: center;
-    background-color: rgba(255,255,255,.9);
-    color: #000;
-    line-height: 3rem;
-    border-radius: 1.5rem;
-    font-size: 1.8rem;
-    font-weight: bold;
   }
 }

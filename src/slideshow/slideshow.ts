@@ -6,7 +6,7 @@ export class Slideshow {
   @bindable stageId;
 
   imageService: FlickrService;
-  collection: Array<any>;
+  imageSet: Array<any>;
   loading: boolean;
   current: number;
   slidePosition: number;
@@ -24,8 +24,8 @@ export class Slideshow {
   private async loadImages(): Promise<any> {
     return this.imageService.getImagesForSetTitle(this.stageId)
       .then((collection) => {
-        this.collection = collection;
-        this.collection.push(this.collection[0]);
+        this.imageSet = collection;
+        this.imageSet.push(this.imageSet[0]);
       });
   }
 
@@ -61,7 +61,7 @@ export class Slideshow {
   }
 
   next() {
-    if (this.current == this.collection.length - 1)
+    if (this.current == this.imageSet.length - 1)
       this.jumpToStart();
     this.current++;
   }
@@ -96,7 +96,7 @@ export class Slideshow {
 
   jumpToEnd() {
     this.transition = false;
-    this.current = this.collection.length - 1;
+    this.current = this.imageSet.length - 1;
     window.setTimeout(() => {
       this.transition = true;
       this.previous();

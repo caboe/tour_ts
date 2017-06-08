@@ -3,11 +3,11 @@
     <require from="navigation/navigation"></require>
 
     <div class="header">
-        <navigation class="hamburger"></navigation>
+        <navigation></navigation>
         <h1 class="title">Eurotour 2010</h1>
-        <div class="step">
-            <div class="back" click.trigger="navigationService.navigateToPreviousPage()">-</div>
-            <div class="forward" click.trigger="navigationService.navigateToNextPage()">+</div>
+        <div class="step controls">
+          <div class="previous control" click.trigger="navigationService.navigateToPreviousPage()"></div>
+          <div class="next control" click.trigger="navigationService.navigateToNextPage()"></div>
         </div>
     </div>
 </template>
