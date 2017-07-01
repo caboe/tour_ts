@@ -7,7 +7,7 @@
         <div class.bind="navigationVisible ? 'active navigation' : 'navigation'">
             <div repeat.for="section of sections  | keys" class="section ${section == currentSection?'active':''}">
                 <h1>${section}</h1>
-                <default if.bind="['article', 'prolog'].includes(section)" section-id.bind="section" section.bind="sections[section]"
+                <default if.bind="['article', 'prolog', 'after'].includes(section)" section-id.bind="section" section.bind="sections[section]"
                          navigateTo.bind="navigateTo"></default>
                 <stage-renderer if.bind="['etap'].includes(section)" section-id.bind="section" section.bind="sections[section]"
                          navigateTo.bind="navigateTo"></stage-renderer>

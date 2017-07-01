@@ -1,0 +1,7 @@
+@import "../../scssCommon/boxes";
+
+.pageAfter {
+  @include textBox;
+  margin: 2rem auto;
+  max-width: 740px;
+}

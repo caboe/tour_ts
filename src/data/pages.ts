@@ -54,6 +54,19 @@ export const pages= {
             distance: 146.44,
             hm: 1181
         }
+    ],
+    after: [
+      {
+        title: 'NWZ',
+        headline: 'Bericht in der Nordwest Zeitung am 17.8.2010',
+        text: 'http://www.nwzonline.de/Region/Stadt/Oldenburg/Artikel/2408422/Mit+dem+Liegerad+nach+Portugal.html',
+        image: 'nwz.jpg'
+      },
+      {
+        title: 'VFL',
+        headline: 'Bericht im Vereinheft des VFL Rastede (12/2010)',
+        image: 'vfl.jpg'
+      }
     ]
 };
 

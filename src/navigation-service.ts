@@ -99,11 +99,18 @@ export class NavigationService {
         rowObject['title'] = this.sections[section][page].title;
         if (section === 'prolog')
           rowObject['moduleId'] = 'page/prolog/prolog';
-        else if (section === 'stage' || section === 'etap')//TODO
+        else if (section === 'stage' || section === 'etap') {//TODO
           rowObject['moduleId'] = 'page/stage/stage';
-        else if (section === 'article')//TODO
+          rowObject['settings'] =  {imageId: this.sections[section][page].imageId};
+        }
+        else if (section === 'article') {//TODO
           rowObject['moduleId'] = 'page/stage/stage';
+        }
+        else if (section === 'after'){
+          rowObject['moduleId'] = 'page/after/after';
+        }
         navigationMap[navigationMap.length] = rowObject;
+        console.log(rowObject)
       }
     }
     return navigationMap;
