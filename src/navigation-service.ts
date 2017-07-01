@@ -96,18 +96,14 @@ export class NavigationService {
         };
         rowObject['route'] = section + this.delimiter + page;
         rowObject['name'] = this.getRouteName([section, page]);
-        rowObject['title'] = this.sections[section][page].title;
-        if (section === 'prolog')
-          rowObject['moduleId'] = 'page/prolog/prolog';
-        else if (section === 'stage' || section === 'etap') {//TODO
-          rowObject['moduleId'] = 'page/stage/stage';
-          rowObject['settings'] =  {imageId: this.sections[section][page].imageId};
-        }
-        else if (section === 'article') {//TODO
-          rowObject['moduleId'] = 'page/stage/stage';
-        }
-        else if (section === 'after'){
-          rowObject['moduleId'] = 'page/after/after';
+        let pageData = this.sections[section][page];
+        let renderer:String = pageData.renderer;
+
+        rowObject['title'] = pageData.title;
+        rowObject['moduleId'] = `page/${renderer}/${renderer}`;
+
+        if (pageData.hasOwnProperty('imageId')) {
+          rowObject['settings'] =  {imageId: pageData.imageId};
         }
         navigationMap[navigationMap.length] = rowObject;
         console.log(rowObject)
