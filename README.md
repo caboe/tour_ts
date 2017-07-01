@@ -6,3 +6,5 @@ Done with
 - Gulp
 - SASS
 - ....
+
+Only one image for layout: background

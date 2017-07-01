@@ -114,15 +114,11 @@ export class NavigationService {
   private getLinearNavigationList(): Array<string>{
     let result = [];
     for (let section in this.sections) {
-      for (let page in this.sections[section]) {
+      for (let page in this.sections[section].data) {
         result.push(this.getRouteName([section, page]));
       }
     }
     return result;
-  }
-
-  getSectionForPath(section: string) {
-    return this.sections[section];
   }
 
   navigateToFirstOfSection(section: string): void {
