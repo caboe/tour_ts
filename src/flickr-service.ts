@@ -74,7 +74,7 @@ export class FlickrService {
     for (let image of this.imageStore[this.getIdForTitle(title)]) {
       client.jsonp(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=${image.id}&api_key=531e7a0d62fe823d91b9ebcfca750195&format=json&jsoncallback=tour.images.addInfo`)
         .then(data => {
-          let trimmedDescription: string = data.response.photo.description._content.replace(/\s+/g, ' ')
+          let trimmedDescription: string = data.response.photo.description._content.replace(/\s+/g, ' ');
           image.description = deRegExp.exec(trimmedDescription)[2];
         });
     }

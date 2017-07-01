@@ -36,7 +36,7 @@ export class NavigationService {
   }
 
   get page() {
-    return this.sections[this.navigatePath[0]][this.navigatePath[1]];
+    return this.sections[this.navigatePath[0]].data[this.navigatePath[1]];
   }
 
   get section(): string {
@@ -86,7 +86,7 @@ export class NavigationService {
       nav: true
     }];
     for (let section in this.sections) {
-      for (let page in this.sections[section]) {
+      for (let page in this.sections[section].data) {
         let rowObject: NavigationRow = {
           route: '',
           name: '',
@@ -96,7 +96,7 @@ export class NavigationService {
         };
         rowObject['route'] = section + this.delimiter + page;
         rowObject['name'] = this.getRouteName([section, page]);
-        let pageData = this.sections[section][page];
+        let pageData = this.sections[section].data[page];
         let renderer:String = pageData.renderer;
 
         rowObject['title'] = pageData.title;
@@ -106,7 +106,6 @@ export class NavigationService {
           rowObject['settings'] =  {imageId: pageData.imageId};
         }
         navigationMap[navigationMap.length] = rowObject;
-        console.log(rowObject)
       }
     }
     return navigationMap;

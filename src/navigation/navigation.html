@@ -6,10 +6,10 @@
         <div click.delegate="toggleNavigation()" class="menu control large"></div>
         <div class.bind="navigationVisible ? 'active navigation' : 'navigation'">
             <div repeat.for="section of sections  | keys" class="section ${section == currentSection?'active':''}">
-                <h1>${section}</h1>
-                <default if.bind="['article', 'prolog', 'after'].includes(section)" section-id.bind="section" section.bind="sections[section]"
+                <h1>${sections[section].navigation.title}</h1>
+                <default if.bind="sections[section].navigation.renderer === 'default'" section-id.bind="section" section.bind="sections[section].data"
                          navigateTo.bind="navigateTo"></default>
-                <stage-renderer if.bind="['etap'].includes(section)" section-id.bind="section" section.bind="sections[section]"
+                <stage-renderer if.bind="sections[section].navigation.renderer === 'stage'" section-id.bind="section" section.bind="sections[section].data"
                          navigateTo.bind="navigateTo"></stage-renderer>
             </div>
         </div>
