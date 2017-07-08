@@ -12,4 +12,3 @@ export class Default extends NavigationBase {
     super(navigationService, eventAggregator);
   }
 }
-
