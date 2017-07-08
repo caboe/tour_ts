@@ -1,0 +1,14 @@
+<template>
+  <require from="./list.css"></require>
+  <div class="pageLink">
+    <h1 innerhtml="${navigationService.currentPage.title}"></h1>
+    <div repeat.for="link of links | keys" class="pageLink_item">
+      <h3>
+        <a href="${links[link].url}" target="_blank">${links[link].title}</a>
+      </h3>
+      <p>
+        ${links[link].capture}
+      </p>
+    </div>
+  </div>
+</template>

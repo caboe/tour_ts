@@ -3,9 +3,13 @@ import {NavigationService} from '../../navigation-service';
 import {BasePage} from "../basePage";
 
 @inject(NavigationService)
-export class After extends BasePage{
+export class List extends BasePage{
+  links;
+
   constructor(navigationService){
     super(navigationService);
+    this.links = this.navigationService.currentPage['links'];
+    console.log(navigationService.currentPage.links)
   }
 }
 

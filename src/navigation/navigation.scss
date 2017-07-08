@@ -38,6 +38,7 @@ nav {
   .item {
     cursor: pointer;
     font-weight: bold;
+    padding-bottom: .8rem;
     &.active {
       color: red;
     }

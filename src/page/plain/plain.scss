@@ -1,0 +1,6 @@
+@import "../../scssCommon/boxes";
+
+.pagePlain {
+  @include textBox;
+  margin: 2rem auto;
+}

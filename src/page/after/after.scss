@@ -4,4 +4,13 @@
   @include textBox;
   margin: 2rem auto;
   max-width: 740px;
+
+  .mediaContainer {
+    text-align: center;
+
+    .media {
+      width: 100%;
+      margin: 0 auto 2rem;
+    }
+  }
 }

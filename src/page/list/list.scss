@@ -1,0 +1,10 @@
+@import "../../scssCommon/boxes";
+
+.pageLink {
+  @include textBox;
+  margin: 2rem auto;
+}
+
+.pageLink_item {
+  margin-bottom: 3rem;
+}

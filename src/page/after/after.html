@@ -3,6 +3,8 @@
   <div class="pageAfter">
     <h1>${navigationService.currentPage.headline}</h1>
     <a target="_blank" href="${navigationService.currentPage.text}">${navigationService.currentPage.text}</a>
-    <img src="/src/images/${navigationService.currentPage.image}"/>
+    <div repeat.for="image of navigationService.currentPage.images" class="mediaContainer">
+      <img src="/src/images/${image}" class="media"/>
+    </div>
   </div>
 </template>
