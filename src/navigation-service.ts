@@ -7,9 +7,6 @@ import {inject} from 'aurelia-framework';
 @inject(Router)
 export class NavigationService {
   public sections: any;//TODO type
-  private navigatePath: Array<string>;
-  public currentPage: JSON;
-  private currentSection: string;
   private router: Router;
   private linearNavigationList: Array<string>;
   private delimiter: string = '/';
@@ -17,30 +14,28 @@ export class NavigationService {
   constructor(router) {
     this.router = router;
     this.sections = pages;
-    this.navigatePath = ['etap', '0'];
-    this.currentPage = this.page;
-    this.currentSection = this.section;
     this.linearNavigationList = this.getLinearNavigationList();
-    // this.navigateToPage(this.navigatePath);
   }
 
-  navigateToPage(path: Array<string>): void {
-    this.navigatePath = path;
-    this.currentPage = this.page;
-    this.currentSection = this.section;
+  public navigateToPage(path: Array<string>): void {
     this.router.navigateToRoute(this.getRouteName(path));
   }
 
-  get path(): Array<string> {
-    return this.navigatePath;
+  private get path(): Array<string> {
+    let currentInstruction = this.router.currentInstruction;
+    if (currentInstruction == null || currentInstruction.fragment === '/'){
+      return this.routeMap[1].route.split('/');
+    }
+    let parts = currentInstruction.fragment.match(/(\w.+)\/(\w.*)/);
+    return [parts[1], parts[2]];
   }
 
-  get page() {
-    return this.sections[this.navigatePath[0]].data[this.navigatePath[1]];
+  get currentPage() {
+    return this.sections[this.path[0]].data[this.path[1]];
   }
 
-  get section(): string {
-    return this.navigatePath[0];
+  private get section(): string {
+    return this.path[0];
   }
 
   public navigateToNextPage(): void{
@@ -58,7 +53,7 @@ export class NavigationService {
   }
 
   private get currentIndex(): number{
-    return this.linearNavigationList.indexOf(this.getRouteName(this.navigatePath));
+    return this.linearNavigationList.indexOf(this.getRouteName(this.path));
   }
 
   private getRouteName(path: Array<string>): string{
@@ -119,9 +114,5 @@ export class NavigationService {
       }
     }
     return result;
-  }
-
-  navigateToFirstOfSection(section: string): void {
-    this.navigateToPage([section, '0'])
   }
 }
