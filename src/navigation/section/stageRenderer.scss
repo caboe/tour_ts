@@ -1,4 +1,12 @@
 .item_stage {
   padding: 0 .6rem;
-  display: inline;
+  display: inline-block;
+  width: 1.5rem;
+  text-align: right;
+}
+
+.item_stage-first {
+  text-align: left;
+  display: block;
+  width: auto;
 }
