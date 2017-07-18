@@ -9,7 +9,6 @@ export class List extends BasePage{
   constructor(navigationService){
     super(navigationService);
     this.links = this.navigationService.currentPage['links'];
-    console.log(navigationService.currentPage.links)
   }
 }
 

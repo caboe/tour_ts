@@ -1,8 +1,11 @@
 .slideshow {
   position: relative;
   overflow: hidden;
-  border-radius: .5rem;
-  margin-bottom: 1rem;
+
+  @media screen and (min-width: 48rem) {
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+  }
 
   .squareImage {
     max-height: 85vh;
@@ -59,7 +62,7 @@
     right: -.3rem;
     bottom: -.3rem;
     border-radius: .4rem;
-    text-shadow: 0 0 2px rgba(0,0,0,.8);
+    text-shadow: 0 0 2px rgba(0, 0, 0, .8);
     text-align: center;
   }
   .slideShadow {
@@ -69,24 +72,25 @@
     right: 0;
     bottom: 0;
     left: 0;
-    box-shadow: 0 0 5px -1px #000 inset;
-    border-radius: 4px;
+    @media screen and (min-width: 48rem) {
+      box-shadow: 0 0 5px -1px #000 inset;
+      border-radius: 4px;
+      &:after, &:before {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: auto;
+        width: 10px;
+        top: -50%;
+        bottom: -50%;
+        background: radial-gradient(ellipse at 140% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+      }
 
-    &:after, &:before {
-      content: "";
-      position: absolute;
-      right: 0;
-      left: auto;
-      width: 10px;
-      top: -50%;
-      bottom: -50%;
-      background: radial-gradient(ellipse at 140% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
-    }
-
-    &:before {
-      left: 0;
-      right: auto;
-      background: radial-gradient(ellipse at -40% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+      &:before {
+        left: 0;
+        right: auto;
+        background: radial-gradient(ellipse at -40% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
+      }
     }
   }
 }

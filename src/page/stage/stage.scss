@@ -1,12 +1,16 @@
 @import "../../scssCommon/boxes";
 
 .pageStage {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  margin: 3rem 4rem;
+  margin: 1rem 0;
   position: relative;
   justify-content: center;
+
+  @media screen and (min-width: 48rem) {
+    display: flex;
+    margin: 3rem 4rem;
+    flex-wrap: wrap;
+  }
 
   &:after, &:before {
     position: absolute;
@@ -24,9 +28,13 @@
     background: radial-gradient(ellipse at -40% 50%, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0) 40%);
   }
   > .flexChild {
-    flex: 1 0 30rem;
-    align-self: flex-start;
-    margin: 0 2rem 2rem;
+    margin: 0 auto 1rem;
+
+    @media screen and (min-width: 48rem) {
+      flex: 1 0 30rem;
+      align-self: flex-start;
+      margin: 0 2rem 2rem;
+    }
   }
 
   .report {

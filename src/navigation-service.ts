@@ -30,11 +30,11 @@ export class NavigationService {
     return [parts[1], parts[2]];
   }
 
-  get currentPage() {
+  public get currentPage() {
     return this.sections[this.path[0]].data[this.path[1]];
   }
 
-  private get section(): string {
+  public get section(): string {
     return this.path[0];
   }
 
