@@ -44,6 +44,12 @@
     flex-grow: 4;
     flex-basis: 50vw;
   }
+  .trip, .label {
+    font-weight: bold;
+  }
+  .trip {
+    margin-bottom: 1rem;
+  }
   h1 {
     font-size: 1.6rem;
     text-align: right;

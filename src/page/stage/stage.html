@@ -6,14 +6,12 @@
       <h2>${navigationService.currentPage.etap}</h2>
       <h1>${navigationService.currentPage.headline}</h1>
       <p innerhtml="${navigationService.currentPage.text | sanitizeHTML}"></p>
-      <div>${navigationService.currentPage.date}</div>
+      <div class="trip">${navigationService.currentPage.date}</div>
       <div>
-        <span>Distanz: ${navigationService.currentPage.distance}</span>
-        <span>Höhenmeter: ${navigationService.currentPage.hm}</span>
-        <!--
-                        <span>${'common:distance' | t:{distance: navigationService.currentPage.distance}}</span>
-                        <span>${'common:height_meter' | t:{hm: navigationService.currentPage.hm}}</span>
-        -->
+        <span class="label">Distanz:</span> ${navigationService.currentPage.distance} km
+      </div>
+      <div>
+        <span class="label">Höhenmeter:</span> ${navigationService.currentPage.hm} m
       </div>
     </div>
     <slideshow class="flexChild slideshowContainer" stage-id.bind="navigationService.currentPage.imageId"></slideshow>
